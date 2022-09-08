@@ -1,20 +1,13 @@
-import SetupRoutes from '../../shared/components/SetupRoutes';
-
-import { LoginPage, SignupPage } from './pages';
-
-const ROUTES = [
-  {
-    path: 'login',
-    component: LoginPage,
-  },
-  {
-    path: 'signup',
-    component: SignupPage,
-  },
-];
+import { Route, Routes } from "react-router-dom";
+import { LoginPage, SignupPage } from "./pages";
 
 const AuthenticationModule = () => {
-  return <SetupRoutes routes={ROUTES} />;
+  return (
+    <Routes>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="signip" element={<SignupPage />} />
+    </Routes>
+  );
 };
 
 export default AuthenticationModule;

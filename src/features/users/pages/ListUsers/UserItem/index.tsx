@@ -1,5 +1,5 @@
 import { Avatar, Button, Stack } from "@mui/material";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { User } from "../../../models/User";
 import * as s from "./styles";
 
@@ -8,10 +8,10 @@ type UserItemProps = {
 };
 
 const UserItem = ({ user }: UserItemProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const linkToDetail = (userId: number) => {
-    history.push(`/users/detail/${userId}`);
+    navigate(`/users/detail/${userId}`);
   };
 
   return (

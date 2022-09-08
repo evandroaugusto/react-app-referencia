@@ -1,7 +1,9 @@
-import styled from 'styled-components';
+import { styled } from "@mui/material";
 
-export const Container = styled.div``;
+export const Container = styled("div")({
+  marginBottom: 30,
+});
 
-export const Title = styled.h1`
-  margin-bottom: 30px;
-`;
+export const Title = styled("h1")({
+  marginBottom: 30,
+});

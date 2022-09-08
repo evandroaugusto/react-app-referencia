@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import { styled } from "@mui/material";
 
-export const Container = styled.div`
-  text-align: center;
-`;
+export const Container = styled("div")({
+  textAlign: "center",
+});
 
-export const Error = styled.span`
-  color: red;
-`;
+export const Error = styled("span")({
+  color: "red",
+});

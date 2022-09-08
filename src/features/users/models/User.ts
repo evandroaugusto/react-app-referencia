@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare */
-import { UserDTO } from '../api/user.dto';
-import { Email } from './Email';
+import { UserDTO } from "../api/dto/user.dto";
+import { Email } from "./Email";
 
 type Id = number;
 

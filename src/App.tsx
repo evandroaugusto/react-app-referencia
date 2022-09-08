@@ -1,9 +1,12 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { BrowserRouter } from 'react-router-dom';
-import GlobalStyles from './core/styles/GlobalStyles';
-import AppRoutes from './App.routes';
-import { AuthenticationProvider } from './core/store/authentication.store';
-import Layout from './shared/layout';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./App.routes";
+import { AuthenticationProvider } from "./core/store/authentication.store";
+import Layout from "./shared/layout";
+
+import "./core/styles/GlobalStyles.css";
 
 // initialize react query
 const queryClient = new QueryClient({
@@ -19,13 +22,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthenticationProvider>
-        <GlobalStyles />
         <BrowserRouter>
           <Layout>
             <AppRoutes />
           </Layout>
         </BrowserRouter>
       </AuthenticationProvider>
+
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

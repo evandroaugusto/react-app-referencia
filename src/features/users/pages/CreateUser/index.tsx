@@ -1,4 +1,4 @@
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import UserForm from "./UserForm";
 import * as s from "./styles";
 import { User } from "../../models/User";
@@ -6,12 +6,12 @@ import { useCreateUser } from "../../api/users.api";
 import Loading from "../../../../shared/components/Loading";
 
 const CreateUserPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const createUser = useCreateUser();
 
   const onSubmit = (user: User) => {
     createUser.mutate(user, {
-      onSuccess: () => history.push("/users/list"),
+      onSuccess: () => navigate("/users/list"),
     });
   };
 

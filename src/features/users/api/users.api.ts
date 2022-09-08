@@ -1,18 +1,15 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { User } from '../models/User';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { User } from "../models/User";
 
-// Está sendo fornecido as funções mockadas
-// No cenário ideal esses comportamentos devem ser fornecidos via injeção de dependência
-// O ContextAPI ajuda a reproduzir esse cenário
-import { fetchUsers, fetchUser, createUser } from './mock/users.api.mock';
+import { fetchUsers, fetchUser, createUser } from "./mock/users.api.mock";
 
 // React Query
 export const useFetchUsers = () => {
-  return useQuery(['users'], () => fetchUsers());
+  return useQuery(["users"], () => fetchUsers());
 };
 
 export const useFetchUser = (userId: number) => {
-  return useQuery(['users', 'detail', userId], () => fetchUser(userId));
+  return useQuery(["users", "detail", userId], () => fetchUser(userId));
 };
 
 export const useCreateUser = () => {
@@ -20,16 +17,16 @@ export const useCreateUser = () => {
 
   return useMutation(createUser, {
     onMutate: async (newUser: User) => {
-      await queryClient.cancelQueries(['users']);
-      const prevUsers = queryClient.getQueryData<User[]>(['users']);
+      await queryClient.cancelQueries(["users"]);
+      const prevUsers = queryClient.getQueryData<User[]>(["users"]);
 
       // realiza atualização "otimista"
       if (prevUsers) {
-        queryClient.setQueryData<User[]>(['users'], [newUser, ...prevUsers]);
+        queryClient.setQueryData<User[]>(["users"], [newUser, ...prevUsers]);
       }
 
       // cria cache da página de detalhe
-      queryClient.setQueryData(['users', 'detail', newUser.id], newUser);
+      queryClient.setQueryData(["users", "detail", newUser.id], newUser);
 
       return prevUsers;
     },

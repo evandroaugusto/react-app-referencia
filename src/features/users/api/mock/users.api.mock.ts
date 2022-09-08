@@ -1,6 +1,6 @@
-import { User } from '../../models/User';
-import { UserDTO } from '../user.dto';
-import FETCH_USERS from './usersData.mock';
+import { User } from "../../models/User";
+import { UserDTO } from "../dto/user.dto";
+import FETCH_USERS from "./usersData.mock";
 
 export const fetchUsers = async (): Promise<User[]> => {
   await new Promise((resolve) =>

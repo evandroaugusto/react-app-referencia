@@ -1,22 +1,18 @@
-import { Redirect, Route } from 'react-router';
-import { useAuth } from '../../../core/store/authentication.store';
+import { Navigate, Outlet, Route } from "react-router";
+import { useAuth } from "../../../core/store/authentication.store";
 
 type Props = {
-  path: string;
-  component: any;
+  children?: React.ReactElement;
 };
 
-const PrivateRoute = ({ component: Component, ...rest }: Props) => {
+const PrivateRoute: React.FC<Props> = ({ children }) => {
   const { isLogged } = useAuth();
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isLogged ? <Component {...props} /> : <Redirect to="/auth/login" />
-      }
-    />
-  );
+  if (!isLogged) {
+    return <Navigate to="/auth/login" />;
+  }
+
+  return children ? children : <Outlet />;
 };
 
 export default PrivateRoute;

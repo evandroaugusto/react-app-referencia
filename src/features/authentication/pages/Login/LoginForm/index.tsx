@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Button,
@@ -7,12 +7,12 @@ import {
   MenuItem,
   Select,
   TextField,
-} from '@mui/material';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import * as s from './styles';
-import Loading from '../../../../../shared/components/Loading';
+} from "@mui/material";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import * as s from "./styles";
+import Loading from "../../../../../shared/components/Loading";
 
 export type FormInputs = {
   email: string;
@@ -38,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, isLoading }) => {
     resolver: yupResolver(validationSchema),
   });
 
-  const [estado, setEstado] = React.useState('none');
+  const [estado, setEstado] = React.useState("none");
 
   const submitHandler: SubmitHandler<FormInputs> = (data) => {
     onSubmit(data);
@@ -56,7 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, isLoading }) => {
       display="flex"
       flexDirection="column"
       sx={{
-        '& .MuiTextField-root': { mt: 2 },
+        "& .MuiTextField-root": { mt: 2 },
       }}
       maxWidth="400px"
       margin="40px auto"

@@ -1,7 +1,8 @@
-import { Avatar, Box, Button } from '@mui/material';
-import { useHistory, useParams } from 'react-router';
-import Loading from '../../../../shared/components/Loading';
-import { useFetchUser } from '../../api/users.api';
+import { Avatar, Box, Button } from "@mui/material";
+import { useNavigate, useParams } from "react-router";
+import Loading from "../../../../shared/components/Loading";
+import { useFetchUser } from "../../api/users.api";
+import UserInfo from "./UserInfo";
 
 type UrlParams = {
   id: string;
@@ -9,20 +10,16 @@ type UrlParams = {
 
 const UserDetailPage = () => {
   const { id } = useParams<UrlParams>();
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const { isLoading, isError, data: user } = useFetchUser(Number(id));
+  const { isLoading, data: user } = useFetchUser(Number(id));
 
   const linkToUsers = () => {
-    history.push('/users/list');
+    navigate("/users/list");
   };
 
   if (isLoading) {
     return <Loading />;
-  }
-
-  if (isError) {
-    return 'Erro ao carregar usuário';
   }
 
   return (
@@ -33,8 +30,8 @@ const UserDetailPage = () => {
         sx={{
           width: 100,
           height: 100,
-          mb: '20px',
-          backgroundColor: user?.image ? '#fff' : '#919191',
+          mb: "20px",
+          backgroundColor: user?.image ? "#fff" : "#919191",
         }}
       />
       <h1>
@@ -53,6 +50,9 @@ const UserDetailPage = () => {
         <b>Sobre</b>: {user?.about}
       </p>
       <br />
+
+      <UserInfo></UserInfo>
+
       <Button variant="contained" onClick={linkToUsers}>
         Voltar
       </Button>

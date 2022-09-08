@@ -8,18 +8,18 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
-Cypress.Commands.add('getBySel', (selector, ...args) => {
+Cypress.Commands.add("getBySel", (selector, ...args) => {
   return cy.get(`[data-test=${selector}]`, ...args);
 });
 
-Cypress.Commands.add('getBySelLike', (selector, ...args) => {
+Cypress.Commands.add("getBySelLike", (selector, ...args) => {
   return cy.get(`[data-test*=${selector}]`, ...args);
 });
 
-Cypress.Commands.add('loginValidUser', () => {
-  cy.visit('/');
+Cypress.Commands.add("loginValidUser", () => {
+  cy.visit("/");
 
-  cy.getBySel('email').type(Cypress.env('login'));
-  cy.getBySel('password').type(Cypress.env('password'));
-  cy.getBySel('submit').click();
+  cy.getBySel("email").type(Cypress.env("login"));
+  cy.getBySel("password").type(Cypress.env("password"));
+  cy.getBySel("submit").click();
 });

@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router';
-import { useAuth } from '../../../../core/store/authentication.store';
-import { useAuthenticate } from '../../api/auth.api';
-import LoginForm, { FormInputs } from './LoginForm';
-import * as s from './styles';
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "../../../../core/store/authentication.store";
+import { useAuthenticate } from "../../api/auth.api";
+import LoginForm, { FormInputs } from "./LoginForm";
+import * as s from "./styles";
 
 const LoginPage = () => {
   const authenticate = useAuthenticate();
   const { signIn } = useAuth();
   const [isInvalid, setIsInvalid] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onSubmit = (data: FormInputs) => {
     setIsInvalid(false);
@@ -22,7 +22,7 @@ const LoginPage = () => {
       {
         onSuccess: () => {
           signIn(data.email);
-          history.push('/users/list');
+          navigate("/users/list");
         },
         onError: () => setIsInvalid(true),
       }

@@ -1,7 +1,6 @@
-import { Paper } from '@mui/material';
-import styled from 'styled-components';
+import { Paper, styled } from "@mui/material";
 
-export const Container = styled.div``;
+export const Container = styled("div")({});
 
 export const Card = styled(Paper)`
   display: flex;

@@ -1,24 +1,22 @@
-import { Button, Grid, Stack } from '@mui/material';
-import { useHistory } from 'react-router-dom';
-import * as s from './styles';
-import { useFetchUsers } from '../../api/users.api';
-import UserItem from './UserItem';
-import Loading from '../../../../shared/components/Loading';
+import { Button, Grid, Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useFetchUsers } from "../../api/users.api";
+import UserItem from "./UserItem";
+import Loading from "../../../../shared/components/Loading";
+import * as s from "./styles";
+import { useUserStore } from "../../store/userContext";
 
 const ListUsersPage = () => {
-  const { isLoading, isError, data: users } = useFetchUsers();
-  const history = useHistory();
+  //const { isLoading, data: users } = useFetchUsers();
+  const { isLoading, users } = useUserStore();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <Loading />;
   }
 
-  if (isError) {
-    return <h1>Erro ao processar consulta...</h1>;
-  }
-
   const linkToCreate = () => {
-    history.push('/users/create-user');
+    navigate("/users/create-user");
   };
 
   return (

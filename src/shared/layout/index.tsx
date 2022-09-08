@@ -1,14 +1,19 @@
-import React from 'react';
-import Header from './header/Header';
-import * as s from './styles';
+import React from "react";
+import Header from "./header/Header";
+import * as s from "./styles";
 
-const Layout: React.FC = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const Layout: React.FC<Props> = ({ children }) => {
   return (
-    <s.Container>
+    <>
       <Header />
-
-      <s.Main>{children}</s.Main>
-    </s.Container>
+      <s.Container>
+        <s.Main>{children}</s.Main>
+      </s.Container>
+    </>
   );
 };
 

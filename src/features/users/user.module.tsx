@@ -1,26 +1,17 @@
-import { ListUsersPage, UserDetailPage, CreateUserPage } from './pages';
-import SetupRoutes from '../../shared/components/SetupRoutes';
-import UserContextProvider from './store/userContext';
-
-const ROUTES = [
-  {
-    path: 'list',
-    component: ListUsersPage,
-  },
-  {
-    path: 'detail/:id',
-    component: UserDetailPage,
-  },
-  {
-    path: 'create-user',
-    component: CreateUserPage,
-  },
-];
+import { ListUsersPage, UserDetailPage, CreateUserPage } from "./pages";
+import { UserContextProvider } from "./store/userContext";
+import { Route, Routes } from "react-router-dom";
+import NotFoundPage from "../../shared/components/ErrorPage/NotFoundPage";
 
 const UsersModule = () => {
   return (
     <UserContextProvider>
-      <SetupRoutes routes={ROUTES} />
+      <Routes>
+        <Route path="list" element={<ListUsersPage />}></Route>
+        <Route path="detail/:id" element={<UserDetailPage />}></Route>
+        <Route path="create-user" element={<CreateUserPage />}></Route>
+        <Route path="*" element={<NotFoundPage />}></Route>
+      </Routes>
     </UserContextProvider>
   );
 };

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import { styled } from "@mui/material";
 
-export const Error = styled.span`
-  color: red;
-  display: block;
-  margin-top: 8px;
-`;
+export const Error = styled("span")({
+  color: "red",
+  display: "block",
+  marginTop: "8px",
+});

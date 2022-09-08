@@ -1,57 +1,51 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "jest": true
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "plugin:cypress/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "airbnb",
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:import/typescript",
-        "plugin:prettier/recommended",
-        "plugin:cypress/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "react-hooks",
-        "@typescript-eslint"
-    ],
-    "settings": {
-      "import/resolver": {
-        "typescript": {}
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "prettier",
+    "import"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": 0,
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [".tsx"]
       }
-    },
-    "rules": {
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
-      "react/react-in-jsx-scope": "off",
-      "react/jsx-filename-extension": [
-        "warn",
-        {
-            "extensions": [".tsx"]
-        }
-      ],
-      "no-use-before-define": "off",
-      "import/prefer-default-export": "off",
-      "import/extensions": ["error", "ignorePackages", {
-        "js": "never",
-        "mjs": "never",
-        "jsx": "never",
-        "tsx": "never",
-        "ts": "never"
-      }],
-      "no-unused-vars": "warn",
-      "prettier/prettier": ["error", { "singleQuote": true }],
-      "react/jsx-props-no-spreading": ["error", {"custom": "ignore"}],
-      "lines-between-class-members": "off"
-    }
+    ],
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "src/core",
+            "from": "src/features"
+          }
+        ]
+      }
+    ]
+  }
 }

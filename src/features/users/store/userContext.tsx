@@ -1,31 +1,59 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { fetchUsers } from "../api/mock/users.api.mock";
 
-type userContextProps = {
-  nome: string;
-  sobrenome: string;
-  setNome: any;
+import { User } from "../models/User";
+
+const useStore = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<any>("");
+
+  const callFetchUsers = async () => {
+    setIsLoading(true);
+
+    try {
+      const data = await fetchUsers();
+      setUsers(data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const update = () => {
+    callFetchUsers();
+  };
+
+  useEffect(() => {
+    callFetchUsers();
+  }, []);
+
+  return {
+    users,
+    setUsers,
+    isLoading,
+    error,
+    update,
+  };
 };
 
-export const UserContext = createContext<userContextProps>(
-  {} as userContextProps
-);
+// ----------------------------------------------------------------------
 
-const UserContextProvider: React.FC = ({ children }) => {
-  const [name, setName] = useState('Evandro');
+type UserStore = ReturnType<typeof useStore>;
 
-  useEffect(() => {}, []);
+type PropsProvider = {
+  children: React.ReactNode;
+};
 
+const UserContext = createContext<UserStore>({} as UserStore);
+
+export const UserContextProvider: React.FC<PropsProvider> = ({ children }) => {
   return (
-    <UserContext.Provider
-      value={{
-        nome: name,
-        sobrenome: 'Oliveira',
-        setNome: setName,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={useStore()}>{children}</UserContext.Provider>
   );
 };
 
-export default UserContextProvider;
+export const useUserStore = () => {
+  return useContext(UserContext);
+};

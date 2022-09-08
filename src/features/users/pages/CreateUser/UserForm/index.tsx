@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { TextField, Box, Button } from "@mui/material";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -38,7 +38,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ defaultValues, onSubmit }) => {
     resolver: yupResolver(validationSchema),
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const submitHandler: SubmitHandler<FormInputs> = (data) => {
     const userProps = { id: new Date().valueOf(), ...data };
@@ -47,7 +47,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ defaultValues, onSubmit }) => {
   };
 
   const linkToHome = () => {
-    history.push("/users/list");
+    navigate("/users/list");
   };
 
   return (
